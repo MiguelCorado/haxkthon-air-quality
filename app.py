@@ -4,14 +4,12 @@ from streamlit_folium import st_folium
 import requests
 import os
 
-# --- PAGE CONFIGURATION ---
 st.set_page_config(
     page_title="Air Quality Monitor",
     page_icon="🌬️",
     layout="wide"
 )
 
-# --- API CONFIGURATION ---
 try:
     OPENWEATHER_API_KEY = st.secrets["OPENWEATHER_API_KEY"]
 except FileNotFoundError:
@@ -168,4 +166,5 @@ if air_data and geo_data:
         calc_details_cols[4].metric(label="SO₂ (μg/m³)", value=f"{so2_v:.2f}", delta=f"AQI: {aqi_v['so2_ppb']}")
         calc_details_cols[5].metric(label="NO₂ (μg/m³)", value=f"{no2_v:.2f}", delta=f"AQI: {aqi_v['no2_ppb']}")
 else:
+
     st.warning("Waiting for a location to be selected on the map or searched to display data.")
